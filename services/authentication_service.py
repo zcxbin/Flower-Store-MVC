@@ -1,8 +1,9 @@
 from fastapi.security import OAuth2PasswordRequestForm
+from sqlalchemy import Update
 from sqlalchemy.orm import Session
 from schemas.user import User as UserSchema
 from models.user import User as UserModel
-from schemas.authentication import Token, Register
+from schemas.authentication import Token, Register, UpdateUser
 from configs.authentication import verify_password, get_password_hash, create_access_token
 
 def get_authen_service():
@@ -41,4 +42,16 @@ class AuthenticationService:
             id=new_user.id,
             username=new_user.username,
             role=new_user.role
+        )
+
+    def update_user(self, update_data: UpdateUser, db: Session) -> UserSchema:
+        user_model = db.query(UserModel).filter(UserModel.username == update_data.username).first()
+        user_model.username = update_data.username
+        user_model.password = get_password_hash(update_data.password)
+        user_model.role = update_data.role
+        db.commit()
+        return UserSchema(
+            id=user_model.id,
+            username=user_model.username,
+            role=user_model.role
         )
