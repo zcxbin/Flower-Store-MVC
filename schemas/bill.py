@@ -20,7 +20,6 @@ class BillFlowerCreate(BaseModel):
 
 
 class BillCreate(BaseModel):
-    bill_date: str
     flowers: List[BillFlowerCreate]
 
     class Config:

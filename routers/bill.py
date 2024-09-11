@@ -7,6 +7,7 @@ from configs.database import get_db
 from configs.authentication import get_current_user
 from services.bill_service import BillService
 from exceptions import raise_error
+from services.user_service import get_user_service
 
 router = APIRouter()
 
@@ -34,10 +35,12 @@ def create_bill(
         bill: BillCreate,
         db: Session = Depends(get_db),
         user=Depends(get_current_user),
-        bill_service: BillService = Depends()
+        bill_service: BillService = Depends(),
+        user_service=Depends(get_user_service)
 ):
     try:
         new_bill = bill_service.create_bill(db, bill, user.id)
+        user_service.set_user_level(db, user.id)
         return BillResponse(
             data=[new_bill],
             length=1

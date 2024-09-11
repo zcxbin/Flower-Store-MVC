@@ -6,3 +6,7 @@ class User(BaseModel):
     username: str
     total_amount: int = 0
     role: str
+
+
+
+

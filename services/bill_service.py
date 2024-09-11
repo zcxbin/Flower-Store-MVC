@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlalchemy.orm import Session
 
 from exceptions import raise_error
@@ -18,7 +20,10 @@ class BillService:
     def create_bill(self, db: Session, bill: BillCreate, user_id: int) -> BillSchema:
         total_amount = 0
 
-        new_bill = BillModel(bill_date=bill.bill_date, user_id=user_id)
+        # Lấy ngày hiện tại và định dạng dưới dạng YYYY-MM-DD
+        current_date = datetime.now().strftime('%Y-%m-%d')
+
+        new_bill = BillModel(bill_date=current_date, user_id=user_id)
         db.add(new_bill)
 
         for bill_flower in bill.flowers:

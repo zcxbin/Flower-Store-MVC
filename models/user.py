@@ -12,5 +12,6 @@ class User(Base):
     password = Column(String(100), nullable=False)
     role = Column(String(100), nullable=False, default='user')
     total_money = Column(Integer, nullable=False, default=0)
+    loyal_level = Column(String(20), nullable=False, default='')
 
     bills = relationship("Bill", back_populates="user")

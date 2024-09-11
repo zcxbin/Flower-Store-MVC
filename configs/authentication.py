@@ -52,6 +52,12 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None) -> s
     return encoded_jwt
 
 
+"""
+    create_access_token đầu truyền vào 1 data, xong hàm get_current_user sẽ decode lại dữ liệu của hàm trên qua 
+    URL('/auth/login'), đầu vào gồm username, role, user_id
+"""
+
+
 async def get_current_user(token: str = Depends(oauth2_scheme)) -> TokenData | HTTPException:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])

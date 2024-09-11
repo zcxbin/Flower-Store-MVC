@@ -8,7 +8,8 @@ ERROR_CODES = {
     200002: 'Create flower failed!',
     200003: 'Create bill failed',
     200004: 'Do not have this account',
-    200005: 'Not found this flower'
+    200005: 'Not found this flower',
+    200008: 'Not found this bill'
 }
 
 
