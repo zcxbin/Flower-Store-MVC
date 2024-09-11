@@ -32,7 +32,7 @@ class UserService:
 
         # print(bills)
         if not bills:
-            raise_error(200008)
+            raise_error(200010)
 
         users = set(bill.user for bill in bills)
 
@@ -43,12 +43,12 @@ class UserService:
             target_year_month = f"{year}-{month}"  # Format the target as YYYY-MM
             print(f"Target year and month: {target_year_month}")
         except ValueError:
-            raise_error(200007)
+            raise_error(200008)
 
         bills = db.query(BillModel).filter(BillModel.bill_date.startswith(target_year_month)).all()
 
         if not bills:
-            raise_error(200008)
+            raise_error(200010)
 
         users = set(bill.user for bill in bills)
         return users
@@ -58,12 +58,12 @@ class UserService:
             target_year = f"{year}"
             print(f"Target year and month: {target_year}")
         except ValueError:
-            raise_error(200007)
+            raise_error(200009)
 
         bills = db.query(BillModel).filter(BillModel.bill_date.startswith(target_year)).all()
 
         if not bills:
-            raise_error(200008)
+            raise_error(200010)
 
         users = set(bill.user for bill in bills)
         return users
@@ -71,7 +71,7 @@ class UserService:
     def set_user_level(self, db: Session, user_id: int) -> UserSchema:
         user = db.query(UserModel).filter(UserModel.id == user_id).first()
         if not user:
-            raise_error(200008)
+            raise_error(200006)
         if user.total_money >= 5000000:
             user.loyal_level = "Diamond"
         elif user.total_money >= 2000000:

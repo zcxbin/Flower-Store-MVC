@@ -9,7 +9,12 @@ ERROR_CODES = {
     200003: 'Create bill failed',
     200004: 'Do not have this account',
     200005: 'Not found this flower',
-    200008: 'Not found this bill'
+    200006: 'Not found any users',
+    200007: 'No user in this day',
+    200008: 'No user in this month',
+    200009: 'No user in this year',
+    200010: 'Not found this bill',
+    200011: 'Wrong date type',
 }
 
 

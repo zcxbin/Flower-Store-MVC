@@ -20,7 +20,6 @@ class BillService:
     def create_bill(self, db: Session, bill: BillCreate, user_id: int) -> BillSchema:
         total_amount = 0
 
-        # Lấy ngày hiện tại và định dạng dưới dạng YYYY-MM-DD
         current_date = datetime.now().strftime('%Y-%m-%d')
 
         new_bill = BillModel(bill_date=current_date, user_id=user_id)
