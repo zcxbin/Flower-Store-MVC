@@ -40,11 +40,14 @@ def create_bill(
 ):
     try:
         new_bill = bill_service.create_bill(db, bill, user.id)
-        user_service.set_user_level(db, user.id)
-        return BillResponse(
-            data=[new_bill],
-            length=1
-        )
+        if new_bill is not None:
+            user_service.set_user_level(db, user.id)
+            return BillResponse(
+                data=[new_bill],
+                length=1
+            )
+        else:
+            return raise_error(200013)
     except Exception:
         print(traceback.format_exc())
         return raise_error(200002)

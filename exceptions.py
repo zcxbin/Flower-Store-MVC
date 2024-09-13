@@ -15,6 +15,8 @@ ERROR_CODES = {
     200009: 'No user in this year',
     200010: 'Not found this bill',
     200011: 'Wrong date type',
+    200012: 'No revenue in this date',
+    200013: 'Cannot create bill'
 }
 
 
